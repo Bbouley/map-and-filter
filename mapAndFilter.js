@@ -1,9 +1,7 @@
 var arr1 = [10,15,20];
-var arr2 = ['return', 'phrases', 'with one word'];
-var arr3 = ['racecar', 'amalgam', 'oligopoly', 'zoom', 'testereng'];
 var myMatrix = [[1,0,1],
                 [1,1,1],
-                [0,1,1]];
+                [0,1,0]];
 var wesFavoritePokemon = [{
                             id: '38413e28-83ec-11e5-8bcf-feff819cdc9f',
                             name: 'Crobat',
@@ -65,75 +63,62 @@ var wesFavoritePokemon = [{
                                              }]
                           }]
 
-function evenNums(arr) {
+
+function evenThenHalf(arr) {
     return arr.filter(function(val, i, arr) {
         return val%2 === 0;
+    }).map(function(el, ind, array) {
+        return el/2;
     })
 }
 
-function oneWord(arr) {
-    return arr.filter(function(val, i, arr) {
-        return val.indexOf(' ') === -1;
-    })
-}
-
-
-function sameVowels(arr) {
-    return arr.filter(function(val, i, arr) {
-        //is there a way to use another reduce here,
-        //instead of a helper function?
-        return checkVowels(val) === val;
-    })
-}
-
-function only0(arr) {
+function matrix(arr) {
     return arr.filter(function(val, i, arr) {
         return val.indexOf(0) !== -1;
+    }).map(function(el, ind, arr2) {
+        return el.filter(function(value, index, array) {
+            return value !== 0;
+        });
+    }).map(function(el, ind, arr) {
+        return el.map(function(val, ind, arr) {
+            return val = 'true';
+        })
     })
 }
 
-function wesID(arr) {
+function firstEvolve(arr) {
     return arr.filter(function(val, i, arr) {
-        return val.id === '3841444a-83ec-11e5-8bcf-feff819cdc9f';
+        return val.evolves === true;
+    }).map(function(el, ind, array) {
+        return el = el.type[0];
     })
 }
 
-function poisonPokemon(arr) {
+function poisonType(arr) {
     return arr.filter(function(val, i, arr) {
         return val.type.indexOf('Poison') !== -1;
+    }).map(function(el, ind, array) {
+        return el = el.name;
     })
 }
 
-function doesntEvolve(arr) {
+function fairyEvolve(arr) {
     return arr.filter(function(val, i, arr) {
-        return val.evolves === false;
+        return val.type.indexOf('Fairy') !== -1;
+    }).map(function(el, ind, array) {
+        return el = el.nextEvolutions;
     })
 }
 
-function formerEvolutions(arr) {
-    return arr.filter(function(val, i, arr) {
-        return val.formerEvolutions.length > 1;
+function formerEvolutionsID(arr) {
+    return arr.map(function(el, ind, array) {
+        return el = el.formerEvolutions[el.formerEvolutions.length-1].id;
     })
 }
 
-// *** helper functions *** //
-
-function checkVowels(string) {
-    var str = string.replace(/[^aeiou]/g, '');
-    var arr = str.split('');
-    for (var i = 0; i < arr.length-1; i++) {
-        if(arr[i] !== arr[i+1]) {
-            return false;
-        }
-    }
-    return string;
-}
-
-console.log(evenNums(arr1));
-console.log(oneWord(arr2));
-console.log(sameVowels(arr3));
-console.log(only0(myMatrix));
-console.log(wesID(wesFavoritePokemon));
-console.log(poisonPokemon(wesFavoritePokemon));
-console.log(doesntEvolve(wesFavoritePokemon));
-console.log(formerEvolutions(wesFavoritePokemon));
+// console.log(evenThenHalf(arr1));
+// console.log(matrix(myMatrix));
+// console.log(firstEvolve(wesFavoritePokemon));
+// console.log(poisonType(wesFavoritePokemon));
+// console.log(fairyEvolve(wesFavoritePokemon));
+console.log(formerEvolutionsID(wesFavoritePokemon));
